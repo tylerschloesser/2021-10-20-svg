@@ -1,6 +1,12 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 
-console.log('hi')
+const App = () => (
+  <svg>
+    <text color="black" fontSize="80px" dominantBaseline="hanging">
+      Tyler
+    </text>
+  </svg>
+)
 
-ReactDom.render(<h1>hi</h1>, document.getElementById('app'))
+ReactDom.render(<App />, document.getElementById('app'))
