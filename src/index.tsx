@@ -221,12 +221,42 @@ const Demo5 = ({ idPrefix }: DemoProps) => (
   </svg>
 )
 
+const smoothTableValues = (n: number) =>
+  _.times(n)
+    .map((i) => i / (n - 1))
+    .join(',')
+
+const Demo6 = ({ idPrefix }: DemoProps) => (
+  <svg width="600" height="800">
+    <filter id={`${idPrefix}-filter`}>
+      <feComponentTransfer>
+        <feFuncG type="discrete" tableValues={smoothTableValues(4)} />
+        <feFuncA type="identity" />
+      </feComponentTransfer>
+    </filter>
+    <image
+      href="https://images.unsplash.com/photo-1632084545916-9f7113450eac?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzNDc3MTEzNQ&ixlib=rb-1.2.1&q=80&w=600"
+      width="600"
+      height="400"
+      filter={`url(#${idPrefix}-filter)`}
+    />
+    <image
+      href="https://images.unsplash.com/photo-1633944241961-e511ab23455f?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzNDc2NjQ3OA&ixlib=rb-1.2.1&q=80&w=600"
+      width="600"
+      height="400"
+      y="400"
+      filter={`url(#${idPrefix}-filter)`}
+    />
+  </svg>
+)
+
 const DEMOS = [
   { Component: Demo1, label: 'Blur' },
   { Component: Demo2, label: 'Flood' },
   { Component: Demo3, label: 'Drop Shadow' },
   { Component: Demo4, label: 'Color Matrix' },
   { Component: Demo5, label: 'Morph' },
+  { Component: Demo6, label: 'Posterization' },
 ]
 
 const App = () => (
