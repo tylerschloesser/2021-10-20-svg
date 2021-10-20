@@ -11,7 +11,22 @@ import ReactDom from 'react-dom'
 
 const App = () => (
   <svg>
-    <text color="black" fontSize="80px" dominantBaseline="hanging">
+    <defs>
+      <filter id="filter">
+        <feMorphology
+          operator="dilate"
+          radius="4"
+          in="SourceAlpha"
+          result="BEVEL_10"
+        />
+      </filter>
+    </defs>
+    <text
+      color="black"
+      fontSize="80px"
+      dominantBaseline="hanging"
+      filter="url(#filter)"
+    >
       Tyler
     </text>
   </svg>
