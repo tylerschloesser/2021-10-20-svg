@@ -12,29 +12,27 @@ import _ from 'lodash'
 
 const App = () => (
   <svg>
-    <defs>
-      <filter id="filter">
-        <feMorphology
-          radius="4"
-          operator="dilate"
-          in="SourceAlpha"
-          result="BEVEL_10"
-        />
-        <feConvolveMatrix
-          order="3,3"
-          kernelMatrix="1 0 0 0 1 0 0 0 1"
-          in="BEVEL_10"
-          result="BEVEL_20"
-        />
-        <feOffset dx="4" dy="4" in="BEVEL_20" result="BEVEL_30" />
-        <feComposite
-          operator="out"
-          in="BEVEL_20"
-          in2="BEVEL_10"
-          result="BEVEL_30"
-        />
-      </filter>
-    </defs>
+    <filter id="filter">
+      <feMorphology
+        radius="4"
+        operator="dilate"
+        in="SourceAlpha"
+        result="BEVEL_10"
+      />
+      <feConvolveMatrix
+        order="3,3"
+        kernelMatrix="1 0 0 0 1 0 0 0 1"
+        in="BEVEL_10"
+        result="BEVEL_20"
+      />
+      <feOffset dx="4" dy="4" in="BEVEL_20" result="BEVEL_30" />
+      <feComposite
+        operator="out"
+        in="BEVEL_20"
+        in2="BEVEL_10"
+        result="BEVEL_30"
+      />
+    </filter>
     <text
       color="black"
       fontFamily="Space Mono"
