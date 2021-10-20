@@ -11,9 +11,13 @@ import _ from 'lodash'
 // />
 //
 
-const Demo1 = () => (
+interface DemoProps {
+  idPrefix: string
+}
+
+const Demo1 = ({ idPrefix }: DemoProps) => (
   <svg>
-    <filter id="filter">
+    <filter id={`${idPrefix}-filter`}>
       <feGaussianBlur stdDeviation="1">
         <animate
           attributeName="stdDeviation"
@@ -30,7 +34,7 @@ const Demo1 = () => (
       fontFamily="Space Mono"
       fontSize="80px"
       dominantBaseline="hanging"
-      filter="url(#filter)"
+      filter={`url(#${idPrefix}-filter)`}
     >
       Tyler
     </text>
@@ -44,7 +48,7 @@ const App = () => (
     {DEMOS.map(({ Component, label }, i) => (
       <li key={i}>
         <label>{`${i + 1}. ${label}`}</label>
-        <Component />
+        <Component idPrefix={`demo-${i + 1}`} />
       </li>
     ))}
   </ol>
