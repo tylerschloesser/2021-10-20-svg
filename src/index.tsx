@@ -117,10 +117,63 @@ const Demo3 = ({ idPrefix }: DemoProps) => (
   </svg>
 )
 
+const Demo4 = ({ idPrefix }: DemoProps) => (
+  <svg width="600" height="400">
+    <filter id={`${idPrefix}-filter`}>
+      <feColorMatrix
+        in="SourceGraphic"
+        type="matrix"
+        values="
+						1   0   0   0   0
+            0   0   0   0   0
+            0   0   0   0   0
+            0   0   0   1   0 "
+        result="Red"
+      />
+      <feColorMatrix
+        in="SourceGraphic"
+        type="matrix"
+        values="
+						0   0   0   0   0
+            0   1   0   0   0
+            0   0   0   0   0
+            0   0   0   1   0 "
+        result="Green"
+      />
+      <feColorMatrix
+        in="SourceGraphic"
+        type="matrix"
+        values="
+						0   0   0   0   0
+            0   0   0   0   0
+            0   0   1   0   0
+            0   0   0   1   0 "
+        result="Blue"
+      />
+      <feComposite in="Red" in2="Green" operator="lighter" result="RedGreen" />
+      <feComposite
+        in="RedGreen"
+        in2="Blue"
+        operator="lighter"
+        result="RedGreenBlue"
+      />
+    </filter>
+    <image
+      href="https://images.unsplash.com/photo-1633944241961-e511ab23455f?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzNDc2NjQ3OA&ixlib=rb-1.2.1&q=80&w=600"
+      width="600"
+      height="400"
+      filter={`url(#${idPrefix}-filter)`}
+    >
+      Tyler
+    </image>
+  </svg>
+)
+
 const DEMOS = [
   { Component: Demo1, label: 'Blur' },
   { Component: Demo2, label: 'Flood' },
   { Component: Demo3, label: 'Drop Shadow' },
+  { Component: Demo4, label: 'Color Matrix' },
 ]
 
 const App = () => (
