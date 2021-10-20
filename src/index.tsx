@@ -43,9 +43,7 @@ const App = () => (
   <ol>
     {DEMOS.map(({ Component, label }, i) => (
       <li key={i}>
-        <label>
-          {i + 1}. {label}
-        </label>
+        <label>{`${i + 1}. ${label}`}</label>
         <Component />
       </li>
     ))}
