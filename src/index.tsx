@@ -37,10 +37,19 @@ const Demo1 = () => (
   </svg>
 )
 
+const DEMOS = [{ Component: Demo1, label: 'Blur with animation' }]
+
 const App = () => (
-  <>
-    <Demo1 />
-  </>
+  <ol>
+    {DEMOS.map(({ Component, label }, i) => (
+      <li key={i}>
+        <label>
+          {i + 1}. {label}
+        </label>
+        <Component />
+      </li>
+    ))}
+  </ol>
 )
 
 ReactDom.render(<App />, document.getElementById('app'))
