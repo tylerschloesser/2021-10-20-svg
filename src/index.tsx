@@ -250,6 +250,30 @@ const Demo6 = ({ idPrefix }: DemoProps) => (
   </svg>
 )
 
+const greyscaleMatrix = (r: number, g: number, b: number) => `
+  ${r} ${g} ${b} 0 0
+  ${r} ${g} ${b} 0 0
+  ${r} ${g} ${b} 0 0
+  0    0    0    1 0
+`
+
+const Demo7 = ({ idPrefix }: DemoProps) => (
+  <svg width="600" height="400">
+    <filter id={`${idPrefix}-filter`}>
+      <feColorMatrix type="matrix" values={greyscaleMatrix(1, 0, 0)} />
+      <feComponentTransfer>
+        <feFuncA type="identity" />
+      </feComponentTransfer>
+    </filter>
+    <image
+      href="https://images.unsplash.com/photo-1632084545916-9f7113450eac?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzNDc3MTEzNQ&ixlib=rb-1.2.1&q=80&w=600"
+      width="600"
+      height="400"
+      filter={`url(#${idPrefix}-filter)`}
+    />
+  </svg>
+)
+
 const DEMOS = [
   { Component: Demo1, label: 'Blur' },
   { Component: Demo2, label: 'Flood' },
@@ -257,6 +281,7 @@ const DEMOS = [
   { Component: Demo4, label: 'Color Matrix' },
   { Component: Demo5, label: 'Morph' },
   { Component: Demo6, label: 'Posterization' },
+  { Component: Demo7, label: 'Greyscale' },
 ]
 
 const App = () => (
