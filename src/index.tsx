@@ -74,23 +74,26 @@ const Demo2 = ({ idPrefix }: DemoProps) => (
 const Demo3 = ({ idPrefix }: DemoProps) => (
   <svg>
     <filter id={`${idPrefix}-filter`}>
-      <feFlood floodColor="rgba(255,0,0,.5)" floodOpacity=".5" result="Flood">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="Blur">
         <animate
-          attributeName="flood-color"
-          values="rgba(255,0,0,.5);rgba(0,0,255,.5);rgba(0,255,0,.5);rgba(255,0,0,.5)"
-          dur="5s"
+          attributeName="stdDeviation"
+          values="4;8;4"
+          dur="2s"
           repeatCount="indefinite"
         />
-      </feFlood>
+      </feGaussianBlur>
+      <feFlood floodColor="black" result="Flood" />
+      <feComposite in="Flood" in2="Blur" operator="in" result="DropShadow" />
+      <feOffset in="DropShadow" dx="10" dy="10" result="DropShadow" />
       <feMerge>
+        <feMergeNode in="DropShadow" />
         <feMergeNode in="SourceGraphic" />
-        <feMergeNode in="Flood" />
       </feMerge>
     </filter>
     <text
       dx="10px"
       dy="10px"
-      color="black"
+      fill="red"
       fontFamily="Space Mono"
       fontSize="80px"
       dominantBaseline="hanging"
