@@ -82,9 +82,22 @@ const Demo3 = ({ idPrefix }: DemoProps) => (
           repeatCount="indefinite"
         />
       </feGaussianBlur>
-      <feFlood floodColor="black" result="Flood" />
+      <feFlood floodColor="grey" result="Flood" />
       <feComposite in="Flood" in2="Blur" operator="in" result="DropShadow" />
-      <feOffset in="DropShadow" dx="10" dy="10" result="DropShadow" />
+      <feOffset in="DropShadow" dx="10" dy="10" result="DropShadow">
+        <animate
+          attributeName="dx"
+          values="10;-10;10"
+          dur="4s"
+          repeatCount="indefinite"
+        />
+        <animate
+          attributeName="dy"
+          values="10;20;10"
+          dur="2s"
+          repeatCount="indefinite"
+        />
+      </feOffset>
       <feMerge>
         <feMergeNode in="DropShadow" />
         <feMergeNode in="SourceGraphic" />
