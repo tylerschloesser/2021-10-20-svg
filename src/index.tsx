@@ -71,9 +71,40 @@ const Demo2 = ({ idPrefix }: DemoProps) => (
   </svg>
 )
 
+const Demo3 = ({ idPrefix }: DemoProps) => (
+  <svg>
+    <filter id={`${idPrefix}-filter`}>
+      <feFlood floodColor="rgba(255,0,0,.5)" floodOpacity=".5" result="Flood">
+        <animate
+          attributeName="flood-color"
+          values="rgba(255,0,0,.5);rgba(0,0,255,.5);rgba(0,255,0,.5);rgba(255,0,0,.5)"
+          dur="5s"
+          repeatCount="indefinite"
+        />
+      </feFlood>
+      <feMerge>
+        <feMergeNode in="SourceGraphic" />
+        <feMergeNode in="Flood" />
+      </feMerge>
+    </filter>
+    <text
+      dx="10px"
+      dy="10px"
+      color="black"
+      fontFamily="Space Mono"
+      fontSize="80px"
+      dominantBaseline="hanging"
+      filter={`url(#${idPrefix}-filter)`}
+    >
+      Tyler
+    </text>
+  </svg>
+)
+
 const DEMOS = [
   { Component: Demo1, label: 'Blur' },
   { Component: Demo2, label: 'Flood' },
+  { Component: Demo3, label: 'Drop Shadow' },
 ]
 
 const App = () => (
