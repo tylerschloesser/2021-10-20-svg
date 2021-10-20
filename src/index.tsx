@@ -157,6 +157,15 @@ const Demo4 = ({ idPrefix }: DemoProps) => (
         operator="lighter"
         result="RedGreenBlue"
       />
+      <feColorMatrix
+        in="RedGreenBlue"
+        type="matrix"
+        values="
+						1   0   0   0   0
+            0   1   0   0   0
+            0   0   1   0   0
+            0   0   0   1   0 "
+      />
     </filter>
     <image
       href="https://images.unsplash.com/photo-1633944241961-e511ab23455f?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzNDc2NjQ3OA&ixlib=rb-1.2.1&q=80&w=600"
@@ -169,11 +178,55 @@ const Demo4 = ({ idPrefix }: DemoProps) => (
   </svg>
 )
 
+const Demo5 = ({ idPrefix }: DemoProps) => (
+  <svg>
+    <filter id={`${idPrefix}-filter`}>
+      <feMorphology operator="dilate" radius="2 2" result="Morphed" />
+      <feComposite
+        in="SourceGraphic"
+        in2="Morphed"
+        operator="xor"
+        result="Outline"
+      />
+      <feFlood floodColor="blue" result="Flood">
+        <animate
+          attributeName="flood-color"
+          values="blue;cyan;blue"
+          dur="2s"
+          repeatCount="indefinite"
+        />
+      </feFlood>
+      <feMerge>
+        <feMergeNode in="Flood" />
+        <feMergeNode in="Outline" />
+      </feMerge>
+    </filter>
+    <text
+      dx="10px"
+      dy="10px"
+      fill="red"
+      fontFamily="Space Mono"
+      fontSize="80px"
+      dominantBaseline="hanging"
+      filter={`url(#${idPrefix}-filter)`}
+    >
+      <animate
+        attributeName="fill"
+        values="white;black;white"
+        dur="2s"
+        repeatCount="indefinite"
+      />
+      Tyler
+    </text>
+  </svg>
+)
+
 const DEMOS = [
   { Component: Demo1, label: 'Blur' },
   { Component: Demo2, label: 'Flood' },
   { Component: Demo3, label: 'Drop Shadow' },
   { Component: Demo4, label: 'Color Matrix' },
+  { Component: Demo5, label: 'Morph' },
 ]
 
 const App = () => (
