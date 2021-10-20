@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDom from 'react-dom'
+import _ from 'lodash'
 
 // <animate
 //   calcMode="paced"
@@ -14,8 +15,8 @@ const App = () => (
     <defs>
       <filter id="filter">
         <feMorphology
+          radius="2"
           operator="dilate"
-          radius="4"
           in="SourceAlpha"
           result="BEVEL_10"
         />
@@ -23,6 +24,7 @@ const App = () => (
     </defs>
     <text
       color="black"
+      fontFamily="Space Mono"
       fontSize="80px"
       dominantBaseline="hanging"
       filter="url(#filter)"
