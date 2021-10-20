@@ -9,31 +9,23 @@ import _ from 'lodash'
 //   dur="5s"
 //   repeatCount="indefinite"
 // />
+//
 
-const App = () => (
+const Demo1 = () => (
   <svg>
     <filter id="filter">
-      <feMorphology
-        radius="4"
-        operator="dilate"
-        in="SourceAlpha"
-        result="BEVEL_10"
-      />
-      <feConvolveMatrix
-        order="3,3"
-        kernelMatrix="1 0 0 0 1 0 0 0 1"
-        in="BEVEL_10"
-        result="BEVEL_20"
-      />
-      <feOffset dx="4" dy="4" in="BEVEL_20" result="BEVEL_30" />
-      <feComposite
-        operator="out"
-        in="BEVEL_20"
-        in2="BEVEL_10"
-        result="BEVEL_30"
-      />
+      <feGaussianBlur stdDeviation="1">
+        <animate
+          attributeName="stdDeviation"
+          values="1;2;3;4;5"
+          dur="5s"
+          repeatCount="indefinite"
+        />
+      </feGaussianBlur>
     </filter>
     <text
+      dx="10px"
+      dy="10px"
       color="black"
       fontFamily="Space Mono"
       fontSize="80px"
@@ -43,6 +35,12 @@ const App = () => (
       Tyler
     </text>
   </svg>
+)
+
+const App = () => (
+  <>
+    <Demo1 />
+  </>
 )
 
 ReactDom.render(<App />, document.getElementById('app'))
